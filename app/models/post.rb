@@ -3,8 +3,11 @@ class Post < ActiveRecord::Base
   belongs_to :author
   validate :is_title_case
 
-  #callback, before you save anything, make sure the title is in titlecase
+  #callback, before you even TRY to save anything, before you validate it
   before_validation :make_title_case
+
+  #do this after it's validated, but before it's saved.
+  before_save :email_author_about_post
 
   private
 
